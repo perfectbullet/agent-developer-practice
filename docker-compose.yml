@@ -1,0 +1,32 @@
+#version: "3.8"
+#
+#services:
+#  mysql:
+#    image: mysql:5.7  # 或者其他版本，比如 mysql:8
+#    container_name: mysql-container
+#    environment:
+#      MYSQL_ROOT_PASSWORD: "123456"  # 设置 MySQL root 用户的密码
+#
+##      MYSQL_DATABASE: langgraph_agent  # 可选，初始化创建的数据库名称
+##      MYSQL_USER: zj  # 可选，创建的普通用户
+##      MYSQL_PASSWORD: 123456  # 可选，普通用户的密码
+##      MYSQL_CHARSET: utf8mb4  # 设置字符集为 utf8mb4
+##      MYSQL_COLLATION: utf8mb4_unicode_ci  # 设置排序规则
+#    ports:
+#      - "3306:3306"  # 映射本地的 3306 端口到容器的 3306 端口
+#    volumes:
+#      - mysql_data:/var/lib/mysql  # 数据持久化
+#    networks:
+#      - mysql_network
+#    restart: always  # 容器崩溃后自动重启
+#    command: [
+#      '--character-set-server=utf8mb4',
+#      '--collation-server=utf8mb4_general_ci',
+#      '--max_connections=3000'
+#    ]
+#volumes:
+#  mysql_data:  # 定义数据卷
+#
+#networks:
+#  mysql_network:  # 自定义网络
+#    driver: bridge  # 使用桥接模式
