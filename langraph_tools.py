@@ -62,12 +62,12 @@ class DeleteWeatherSchema(BaseModel):
 @tool(args_schema=WeatherLoc)
 def get_weather(location):
     """
-    Function to query current weather.
-    :param loc: Required parameter, of type string, representing the specific city name for the weather query. \
-    Note that for cities in China, the corresponding English city name should be used. For example, to query the weather for Beijing, \
-    the loc parameter should be input as 'Beijing'.
-    :return: The result of the OpenWeather API query for current weather, with the specific URL request address being: https://api.openweathermap.org/data/2.5/weather. \
-    The return type is a JSON-formatted object after parsing, represented as a string, containing all important weather information.
+    查询当前天气的函数。
+    :param location: 必需参数，字符串类型，表示要查询天气的具体城市名称。
+        注意，对于中国的城市，应使用相应的英文城市名称。例如，要查询北京的天气，
+        则loc参数应输入为'Beijing'。
+    :return: OpenWeather API查询当前天气的结果，具体URL请求地址为：https://api.openweathermap.org/data/2.5/weather。
+        返回类型是解析后的JSON格式对象，表示为字符串，包含所有重要的天气信息。
     """
     # Step 1.构建请求
     url = "https://api.openweathermap.org/data/2.5/weather"
@@ -90,7 +90,7 @@ def get_weather(location):
 
 @tool(args_schema=WeatherInfo)
 def insert_weather_to_db(city_id, city_name, main_weather, description, temperature, feels_like, temp_min, temp_max):
-    """Insert weather information into the database."""
+    """将天气信息插入数据库。"""
     session = Session()  # 确保为每次操作创建新的会话
     try:
         # 创建天气实例
@@ -163,3 +163,4 @@ def delete_weather_from_db(city_name: str):
         return {"messages": [f"删除失败，错误原因：{e}"]}
     finally:
         session.close()  # 关闭会话
+
