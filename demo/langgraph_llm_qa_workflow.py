@@ -1,8 +1,9 @@
+from os.path import basename
 from langgraph.graph import StateGraph, START, END
 from typing import TypedDict, Optional
 
 from ds_llm import llm
-
+from utils import save_graph_image
 
 # 定义图中输入状态
 class InputState(TypedDict):
@@ -45,6 +46,8 @@ builder.add_edge('action_node', END)
 
 # 编译图
 graph = builder.compile()
-
+graph_image_path = save_graph_image(graph, basename(__file__).split('.')[0])
+print('graph_image_path:', graph_image_path)
 final_answer = graph.invoke({'question': '北京今天天气'})
+
 print(final_answer)
