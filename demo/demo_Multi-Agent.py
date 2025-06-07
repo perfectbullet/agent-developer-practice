@@ -11,21 +11,22 @@ from utils import save_graph_image
 
 # 定义父图中的状态
 class ParentState(TypedDict):
-    user_input: str   # 用来接收用户的输入
-    final_answer: str   # 用来存储大模型针对用户输入的响应
+    user_input: str  # 用来接收用户的输入
+    final_answer: str  # 用来存储大模型针对用户输入的响应
+
 
 def parent_node(state: ParentState):
     messages = [("human", state["user_input"])]
     response = llm.invoke(messages)
     return {'final_answer': response.content}
 
+
 # 定义子图中的状态
 class SubgraphState(TypedDict):
     # 这个 key 是和 父图（ParentState）共享的，
     final_answer: str
     # 这个key 是 子图 (subgraph) 中独享的
-    summary_answer:str
-
+    summary_answer: str
 
 
 def subgraph_node_1(state: SubgraphState):
@@ -75,3 +76,6 @@ save_graph_image(graph, basename(__file__).split('.')[0])
 if __name__ == '__main__':
     for chunk in graph.stream({"user_input": "我现在想学习大模型，应该关注哪些技术？"}, stream_mode='values'):
         print(chunk)
+
+    # for chunk in graph.stream({"user_input": "如何理解RAG？"}, stream_mode='values', subgraphs=True):
+    #     print(chunk)

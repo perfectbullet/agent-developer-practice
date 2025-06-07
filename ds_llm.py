@@ -6,7 +6,8 @@ import os
 load_dotenv()
 if not os.getenv("DEEPSEEK_API_KEY"):
     os.environ["DEEPSEEK_API_KEY"] = getpass.getpass()
-print(os.environ["DEEPSEEK_API_KEY"])
+else:
+    print('get deepseek api key')
 
 
 llm = ChatDeepSeek(
