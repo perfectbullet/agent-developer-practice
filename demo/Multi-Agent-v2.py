@@ -1,7 +1,5 @@
 from os.path import basename
 
-from ds_llm import llm
-
 from typing import TypedDict
 from langchain_core.messages import AnyMessage, SystemMessage, HumanMessage, AIMessage
 
@@ -10,6 +8,7 @@ from utils import save_graph_image
 
 from langchain_core.messages import AnyMessage, SystemMessage, HumanMessage, AIMessage
 from typing import TypedDict
+from ds_llm import llm
 
 
 # 定义父图中的状态
@@ -66,6 +65,8 @@ subgraph_builder.add_node(subgraph_node_2)
 subgraph_builder.add_edge(START, "subgraph_node_1")
 subgraph_builder.add_edge("subgraph_node_1", "subgraph_node_2")
 subgraph = subgraph_builder.compile()
+
+
 # ################################ 子图中专注于处理自己内部的逻辑，无需关心父图中的状态中都定义了哪些键
 
 # ################################ parent_node_2用来连接父图与子图之间的网络通信，它通过将父节点与子节点的状态做转化来达到此目的
@@ -87,5 +88,10 @@ builder.add_edge('parent_node_1', 'subgraph_node')
 graph = builder.compile()
 save_graph_image(graph, basename(__file__).split('.')[0])
 
-for chunk in graph.stream({"user_input": "我现在想学习大模型，应该关注哪些技术？"}, stream_mode='values'):
-    print(chunk)
+if __name__ == '__main__':
+    all_chunk = []
+    for chunk in graph.stream({"user_input": "我现在想学习大模型，应该关注哪些技术？"}, stream_mode='values'):
+        print(chunk)
+        all_chunk.extend(chunk)
+
+    all_chunk

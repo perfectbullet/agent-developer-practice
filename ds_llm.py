@@ -22,12 +22,13 @@ llm = ChatDeepSeek(
 
 if __name__ == '__main__':
 
-    messages = [
-        (
-            "system",
-            "You are a helpful assistant that translates English to Chinese. Translate the user sentence.",
-        ),
-        ("human", "I love programming."),
-    ]
-    ai_msg = llm.invoke(messages)
-    print(ai_msg.content)
+    # messages = [
+    #     (
+    #         "system",
+    #         "You are a helpful assistant that translates English to Chinese. Translate the user sentence.",
+    #     ),
+    #     ("human", "I love programming."),
+    # ]
+    # ai_msg = llm.invoke(messages)
+    # print(ai_msg.content)
+    print(llm.invoke("帮我写一个使用Python实现的贪吃蛇的游戏代码").content)
