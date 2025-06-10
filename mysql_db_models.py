@@ -1,11 +1,9 @@
-from sqlalchemy import create_engine, Column, Integer, String, Float
-from sqlalchemy.orm import sessionmaker, declarative_base
+
+__all__ = ['Session', 'engine', 'CompetitorAnalysis', 'ProductInformation', 'CompetitorAnalysis']
+
 
 from sqlalchemy import create_engine, Column, Integer, String, Float, ForeignKey
 from sqlalchemy.orm import sessionmaker, declarative_base
-from faker import Faker
-import random
-
 
 # 创建基类
 Base = declarative_base()
